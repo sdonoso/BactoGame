@@ -10,6 +10,8 @@ class Colony:
         self.image = image
         self.surface = surface
         self.rect = image.get_rect()
+        self.rect.centerx = self.x + (image.get_size()[0] / 2)
+        self.rect.centery = self.y + (image.get_size()[1] / 2)
 
     def set_color(self, newColor):
         """
@@ -41,7 +43,7 @@ class Colony:
     def get_area(self):
         area = []
         area.append(self.x + self.image.get_size()[0])
-        area.append(self.y + self.image.getsize()[0])
+        area.append(self.y + self.image.get_size()[1])
         return area
 
     def draw(self):

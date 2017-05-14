@@ -61,8 +61,6 @@ while True:
                 select_colony.append(1)
 
             else:
-                print("waaa")
-
                 select_colony = []
                 dibujar = 1
                 bact_llegada = mouse_pos
@@ -89,6 +87,7 @@ while True:
     if dibujar == 1:
 
         bactum.move()
+        bactum.impact(colony2)
         actualp = bactum.get_pos()
         bactum.draw()
         if abs(bact_llegada[0] - actualp[0]) < 10 and abs(bact_llegada[1] - actualp[1] < 10):
