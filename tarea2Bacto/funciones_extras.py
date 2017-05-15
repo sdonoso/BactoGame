@@ -22,18 +22,21 @@ def dibuja_numero(colonys, surface):
     font = pygame.font.Font(FONT, 40)
     for colony in colonys:
         number = str(colony.get_number())
-        center = colony.getPos()
+        center = colony.get_centro()
         render = font.render(number, 1, COLOR_ORANGE)
         surface.blit(render, center)
 
 
-def find_colony(colonys, pos):
+def find_colony(colonys, pos, player):
     """
     busca la colonia en la posicion que se hizo click
     :param colonys:
     :return:
     """
+
     for colony in colonys:
-        area = colony.get_area
-        if colony.getX() < pos[0] < area[0] and colony.getX() < pos[1] < area[1]:
-            return colony
+        area = colony.get_area()
+        if colony.x <= pos[0] <= area[0] and colony.y < pos[1] < area[1]:
+            if colony.get_color() == player.get_color():
+                return colony
+    return None
