@@ -4,10 +4,7 @@ import pygame
 
 
 class Bacterium:
-    def __init__(self, x, y, speed, rTime, defense, image, surface, id,cllega,tipo,color):
-        self.speed = speed
-        self.rTime = rTime
-        self.defense = defense
+    def __init__(self, x, y, image, surface, id, cllega, tipo, color):
         self.x = x
         self.y = y
         self.image = image
@@ -59,11 +56,15 @@ class Bacterium:
             respuesta = self.llego(colony)
             if respuesta[0] == True:
                 if respuesta[1] == 1:
-                    #self.reset_move()
+                    # self.reset_move()
                     return 1
                 else:
-                    self.x += self.stepX / 2
-                    self.y += self.stepY / 2
+                    if self.tipo == SPEED: # si es de tipo velocidad se aumenta
+                        self.x += self.stepX / 2 + 0.5
+                        self.y += self.stepY / 2 + 0.5
+                    else:
+                        self.x += self.stepX / 2 + 0.5
+                        self.y += self.stepY / 2 + 0.5
                     return 0
 
 
@@ -119,7 +120,6 @@ class Bacterium:
         pinicial = [self.x, self.y]
         self.move_to(pinicial, self.posF)
 
-
     def reset_move(self):
         self.stepY = 0
         self.stepX = 0
@@ -127,27 +127,32 @@ class Bacterium:
         self.dy = 0
 
     def draw(self):
-        if self.llegada != 'si':
-            #si es de tipo que rota se hace rotar
+        if self.tipo == SPEED:
+            self.rot_center()
+        if self.llegada != 'si' and self.salirse_pantalla() == False:
             self.surface.blit(self.image, (int(self.x), int(self.y)))
 
     def rot_center(self):
-        self.image = pygame.transform.rotate(self.image, 90)
+        self.image = pygame.transform.rotate(self.image, -90)
 
     def scale(self):
         self.image = pygame.transform.scale(self.image, (60, 60))
 
     def llego(self, colony):
-        if abs(self.y - self.col_llega.y) <= 10 and self.col_llega.x + 5 <= self.x <= self.col_llega.get_area()[0] or abs(
-                        self.x - self.col_llega.x) <= 10 and self.col_llega.y <= self.y <= self.col_llega.get_area()[1] or abs(
-                    self.y - self.col_llega.get_area()[1]) <= 10 and self.col_llega.x + 5 <= self.x <= self.col_llega.get_area()[
+        if abs(self.y - self.col_llega.y) <= 10 and self.col_llega.x + 5 <= self.x <= self.col_llega.get_area()[
             0] or abs(
-                    self.x - self.col_llega.get_area()[0]) <= 10 and self.col_llega.y <= self.y <= self.col_llega.get_area()[1]:
+                    self.x - self.col_llega.x) <= 10 and self.col_llega.y <= self.y <= self.col_llega.get_area()[
+            1] or abs(
+                    self.y - self.col_llega.get_area()[1]) <= 10 and self.col_llega.x + 5 <= self.x <= \
+                self.col_llega.get_area()[
+                    0] or abs(
+                    self.x - self.col_llega.get_area()[0]) <= 10 and self.col_llega.y <= self.y <= \
+                self.col_llega.get_area()[1]:
 
             area = self.col_llega.get_area()
             if self.col_llega.x <= self.x <= area[0] and self.col_llega.y < self.y < area[1]:
                 self.llegada = 'si'
-                self.col_llega.llego(self.color,self.tipo)#aviso a la colonia que llegue
+                self.col_llega.llego(self.color, self.tipo)  # aviso a la colonia que llegue
 
                 return [True, 1]
             else:
@@ -155,3 +160,9 @@ class Bacterium:
 
         else:
             return [False, 0]
+
+    def salirse_pantalla(self):
+        if self.x < 0 or self.y < 0 or self.x > SWIDTH or self.y > SHEIGHT:
+            return True
+        else:
+            return False

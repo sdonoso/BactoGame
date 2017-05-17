@@ -12,5 +12,6 @@ class Player:
     def set_colonias(self, colonia):
         colonia.set_color( self.color)
         colonia.set_tipo(self.tipo)
+        colonia.set_number(20)
         #aca va coloni.load_image imagen del color
         self.colonias.append(colonia)

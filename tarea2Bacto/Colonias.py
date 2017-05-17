@@ -79,14 +79,16 @@ class Colony:
         if self.color == "Gray" or self.color == color:
             self.set_number(1)
             self.color = color
+            self.tipo = tipo
         else:
             if tipo == SPEED or tipo == REPRODUCTION:
                 self.set_number(-1)
-                self.revisar()
+                self.revisar(tipo, color)
             elif tipo == DEFENCE:
-                if random() < 0.3:  # mas probabilidades de resistir ataques
+                a = random.random()
+                if a < 0.3:  # mas probabilidades de resistir ataques
                     self.set_number(-1)
-                    self.revisar()
+                    self.revisar(tipo, color)
 
     def set_id(self, id):
         self.id = id
@@ -113,6 +115,8 @@ class Colony:
 
     def set_tipo(self, tipo):
         self.tipo = tipo
-    def revisar(self):
+
+    def revisar(self, tipo, color):
         if self.number == 0:
-            self.color = "Gray"
+            self.color = color
+            self.tipo = tipo
