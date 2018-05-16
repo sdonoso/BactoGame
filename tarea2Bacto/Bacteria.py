@@ -49,9 +49,7 @@ class Bacterium:
         muevele la particula
         :return:
         """
-        # if self.l == 0:
-        # self.impact(colony)
-        # if self.angulo == 0:
+
         for colony in colonys:  # se ve si se llego a la colonia seleccionada
             respuesta = self.llego(colony)
             if respuesta[0] == True:
@@ -88,22 +86,22 @@ class Bacterium:
                 if abs(self.y - colony.y) <= 10 and colony.x + 5 <= self.x <= colony.get_area()[0]:
 
                     self.move_on_x()
-                    print(1)
+
                     return True
                 elif abs(self.x - colony.x) <= 10 and colony.y <= self.y <= colony.get_area()[1]:
 
                     self.move_on_y()
-                    print (2)
+
                     return True
                 elif abs(self.y - colony.get_area()[1]) <= 10 and colony.x + 5 <= self.x <= colony.get_area()[0]:
 
                     self.move_on_x()
-                    print(3)
+
                     return True
                 elif abs(self.x - colony.get_area()[0]) <= 10 and colony.y <= self.y <= colony.get_area()[1]:
 
                     self.move_on_y()
-                    print(4)
+
                     return True
         return False
 

@@ -105,7 +105,7 @@ while True:
                     # --------------------------------inteligencia oponente
                     enemy.atacar_I(colonias, bacterias_enemy, surface, opcion)
 
-                    # --------------------------------
+                    # --------------------------------q
                     posin = None
                     posfin = None
                     selColony = None

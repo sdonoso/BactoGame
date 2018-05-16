@@ -160,22 +160,22 @@ def menu(surface, player1, enemy):
                     p = False
                     player1.tipo = SPEED  # seteo el tipo que se eligio
                     enemy.tipo = choice([DEFENCE, REPRODUCTION])
-                    player1.set_colonias(colonias[1])
-                    enemy.set_colonia(colonias[2])
+                    player1.set_colonias(colonias[0])
+                    enemy.set_colonia(colonias[6])
                     return SPEED, colonias
                 elif pos2[0] <= p_mouse[0] <= pos2[2] and pos2[1] <= p_mouse[1] <= pos2[3]:
                     p = False
                     player1.tipo = DEFENCE
                     enemy.tipo = choice([SPEED, REPRODUCTION])
-                    player1.set_colonias(colonias[1])
-                    enemy.set_colonia(colonias[2])
+                    player1.set_colonias(colonias[0])
+                    enemy.set_colonia(colonias[6])
                     return DEFENCE, colonias
                 elif pos3[0] <= p_mouse[0] <= pos3[2] and pos3[1] <= p_mouse[1] <= pos3[3]:
                     p = False
                     player1.tipo = REPRODUCTION
                     enemy.tipo = choice([DEFENCE, SPEED])
-                    player1.set_colonias(colonias[1])
-                    enemy.set_colonia(colonias[2])
+                    player1.set_colonias(colonias[0])
+                    enemy.set_colonia(colonias[6])
                     return REPRODUCTION, colonias
 
         pygame.display.flip()
